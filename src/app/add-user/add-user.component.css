@@ -1,0 +1,29 @@
+.form-fields {
+    margin-bottom: 2em;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: 35px;
+    color: purple;
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .upload-btn-wrapper input[type='file'] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .upload-btn-wrapper:hover {
+    cursor: pointer;
+  }

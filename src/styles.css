@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.pro-buttons {
+  color: white;
+  background: orange;
+  border: none;
+  border-radius: 2vw;
+}
+.pro-buttons:hover {
+  cursor: pointer;
+}

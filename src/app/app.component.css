@@ -1,0 +1,22 @@
+.container {
+  padding: 32px 32px;
+  height: 93%;
+}
+.pro-buttons {
+  color: white;
+  background: orange;
+  border: none;
+  border-radius: 2vw;
+}
+.pro-buttons:hover {
+    cursor: pointer;
+}
+button {
+    outline: none;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
