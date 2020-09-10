@@ -1,8 +1,9 @@
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, Output } from '@angular/core';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-user-detail',
@@ -11,6 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class UserDetailComponent implements AfterViewInit {
   @Input() users: [];
+  @Output() editUser = new EventEmitter();
+  @Output() deleteUser = new EventEmitter();
 
   displayedColumns: string[] = [
     'name',
@@ -20,6 +23,8 @@ export class UserDetailComponent implements AfterViewInit {
     // 'pin',
     // 'state',
     'file Name',
+    'edit',
+    'delete',
   ];
   dataSource: MatTableDataSource<any>;
 
@@ -47,5 +52,13 @@ export class UserDetailComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  editUserDetails(user) {
+    this.editUser.emit(user);
+  }
+
+  deleteUserDetails(user) {
+    this.deleteUser.emit(user);
   }
 }

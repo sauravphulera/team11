@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -20,6 +20,9 @@ const youngerThanValidator = (maxAge: number): ValidatorFn => (control) =>
 })
 export class AddUserComponent implements OnInit {
   @Output() addNewUser = new EventEmitter();
+  @Output() editUser = new EventEmitter();
+  @Input() editData: boolean;
+  @Input() user: any;
 
   addUserForm: FormGroup;
   filesToUpload = [];
@@ -35,7 +38,20 @@ export class AddUserComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
     });
+    if (this.editData === true && this.user) {
+      console.log(this.user);
+      this.addUserForm.patchValue({
+        name: this.user.name,
+        dob: this.user.dob,
+        gender: this.user.gender,
+        pin: this.user.pin,
+        city: this.user.city,
+        state: this.user.state,
+      });
+      this.filesToUpload.push(this.user.file);
+    }
   }
+  // ngOnChanges() {}
   validateUserInputs() {
     console.log(this.addUserForm);
     if (!this.addUserForm.valid) {
@@ -44,13 +60,18 @@ export class AddUserComponent implements OnInit {
         control.markAsDirty();
         control.markAsTouched();
       });
-    } else {
-      console.log(this.addUserForm.value);
+    } else if (this.editData) {
       const fields = {
         ...this.addUserForm.value,
         file: this.filesToUpload[0],
-      }
-      console.log(fields);
+        id: this.user.id,
+      };
+      this.editUser.emit(fields);
+    } else {
+      const fields = {
+        ...this.addUserForm.value,
+        file: this.filesToUpload[0],
+      };
       this.addNewUser.emit(fields);
     }
   }

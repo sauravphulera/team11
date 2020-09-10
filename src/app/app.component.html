@@ -6,16 +6,30 @@
       </button>
     </div>
     <div>
-      <app-user-detail [users]="this.userList"></app-user-detail>
+      <app-user-detail
+        [users]="this.userList"
+        (deleteUser)="this.deleteUser($event)"
+        (editUser)="this.editUser($event)"
+      ></app-user-detail>
     </div>
   </div>
   <div class="buttons" *ngIf="this.showAddUser">
-    <button mat-button class="pro-buttons" style="background: purple;" (click)="this.showAddUser = false">
+    <button
+      mat-button
+      class="pro-buttons"
+      style="background: purple"
+      (click)="this.showAddUser = false"
+    >
       Show List
     </button>
   </div>
   <div class="form" *ngIf="this.showAddUser">
-    <app-add-user (addNewUser) = "this.addNewUSer($event)"></app-add-user>
+    <app-add-user
+      [editData]="this.editData"
+      [user] = "this.selectedUser"
+      (addNewUser)="this.addNewUSer($event)"
+      (editUser) = "this.editUserDetails($event)"
+    ></app-add-user>
   </div>
 </div>
 <router-outlet></router-outlet>
